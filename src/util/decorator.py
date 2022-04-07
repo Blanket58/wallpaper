@@ -14,7 +14,7 @@ def retry(func, max_retry=3, logger=None, *args, **kwargs):
         try:
             return func(*args, **kwargs)
         except Exception as e:
-            logger.exception(e)
             logger.warning(f'Retrying [{i + 1} / {max_retry}]')
             error = e
+    logger.error(error)
     raise error

@@ -17,7 +17,7 @@ class DataBase:
     def set(self, key, value):
         self.logger.info('Adding new picture')
         if self.connection.exists(key):
-            self.logger.warning('Key already exist')
+            self.logger.error('Key already exist')
             raise KeyError
         else:
             self.connection.dcreate(key)
@@ -27,8 +27,11 @@ class DataBase:
 
     def reset(self):
         self.logger.info('Reseting database')
-        remove('src/data.db')
-        self.logger.info('OK')
+        try:
+            remove('src/data.db')
+            self.logger.info('OK')
+        except FileNotFoundError:
+            self.logger.error('Database is not initialized.')
 
     def __call__(self, key, value):
         return self.set(key, value)

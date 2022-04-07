@@ -33,7 +33,7 @@ class Bing(Extractor):
         }
 
     def random(self):
-        number = randint(0, 1000)
+        number = randint(0, 7)
         if number == 0:
             return self.today()
         else:
